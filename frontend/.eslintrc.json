@@ -1,0 +1,6 @@
+{
+  // "extends": "next/core-web-vitals" <-セットアップ時の初期設定
+
+  // module-exportsエラー対策の設定
+  "extends": ["next", "next/core-web-vitals", "prettier", "next/babel"]
+}
