@@ -3,34 +3,24 @@
 # このファイルは、リクエストとレスポンスのデータ構造を定義します。
 # ここでのバリデーションがデータの整合性を保証する重要な役割を果たします。
 
-from typing import List, Dict, Set, Union, Optional
 from pydantic import BaseModel
 
 
-# リクエスト用のユーザー作成スキーマ
-class CreateUserRequest(BaseModel):
-    name: str
-    age: int
+# アイデア作成用スキーマ
+class IdeaCreate(BaseModel):
+    text: str
 
 
-# レスポンスとして返されるユーザー情報のスキーマ
-class UserResponse(BaseModel):
+# アイデア読み込み用スキーマ（レスポンス用）
+class Idea(BaseModel):
     id: int
-    name: str
-    age: int
+    text: str
+
+    class Config:
+        from_attributes = True
 
 
-# 複数のユーザー情報を含むレスポンスのスキーマ
-class UsersResponse(BaseModel):
-    users: List[UserResponse]
-
-
-# ユーザーの更新リクエストのためのスキーマ
-class UpdateUserRequest(BaseModel):
-    name: str
-    age: int
-
-
-# ユーザーの削除レスポンスのためのスキーマ
-class DeleteUserResponse(BaseModel):
-    message: str
+# (推奨)from_ormの非推奨化され、model_validateが新設された
+# V1では、ORMインスタンスからPydanticインスタンスを作成する場合は、orm_mode=Trueをセットし、from_ormで処理していましたが
+# V2では、from_attributes=Trueをセットし、model_validateで処理するように変更されています。
+# ただし、from_ormも現状では従来通り動作します。

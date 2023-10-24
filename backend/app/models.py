@@ -6,16 +6,20 @@
 from sqlalchemy import Column, Integer, String, Sequence
 from sqlalchemy.ext.declarative import declarative_base
 
+"""
+すでにmodels.pyが存在しますが、
+将来的に新しいテーブルやクラスが増えた場合、それぞれのモデルクラスを別々のファイルに分割して、
+modelsディレクトリの中に配置すること  (例)./models/user_models.py .. hello_models.py ...
+"""
+
 # declarative_baseクラスは、モデルクラスの基底クラスとして機能し、
 # テーブルとモデルクラスのマッピングを自動化します。
 Base = declarative_base()
 
 
-# ユーザーテーブルを作成
-class User(Base):
-    __tablename__ = "users"
-    id = Column(
-        Integer, primary_key=True, index=True
-    )  # idが一意であり、高速な検索が可能なインデックスとして機能するようにします
-    name = Column(String, index=True)  # 名前での検索を最適化する可能性があるため、インデックスを追加します
-    age = Column(Integer)
+# アイデアテーブル作成
+class Idea(Base):
+    __tablename__ = "ideas"
+
+    id = Column(Integer, primary_key=True, index=True)
+    text = Column(String, index=True)

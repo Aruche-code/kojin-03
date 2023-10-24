@@ -1,52 +1,70 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import UserForm from '../components/UserForm';
-import UserListItem from '../components/UserListItem';
 
-const IndexPage = () => {
-  const [users, setUsers] = useState([]);
+const HomePage = () => {
+  // アイデアのテキストを管理するためのステート
+  const [ideaText, setIdeaText] = useState('');
+  // 送信されたアイデアを表示するためのステート
+  const [ideas, setIdeas] = useState([]);
 
-  useEffect(() => {
-    // ユーザーのデータを取得する
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('/api/users');
-        setUsers(response.data);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
-  const handleAddUser = async (newUser) => {
+  // アイデアのリストを取得する関数
+  const fetchIdeas = async () => {
     try {
-      const response = await axios.post('/api/users', newUser);
-      setUsers([...users, response.data]);
+      const response = await axios.get('/api/ideas/get');
+      setIdeas(response.data);
     } catch (error) {
-      console.error('Error adding user:', error);
+      console.error("アイデアの取得に失敗しました:", error);
     }
   };
 
-  const handleDeleteUser = async (id) => {
+  // コンポーネントがマウントされた時にアイデアのリストを取得
+  useEffect(() => {
+    fetchIdeas();
+  }, []);
+
+  // アイデアを送信する関数
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      await axios.delete(`/api/users/${id}`);
-      setUsers(users.filter((user) => user.id !== id));
+      // バックエンドにPOSTリクエストを送信
+      const response = await axios.post('/api/ideas/post', { text: ideaText });
+      // 新しいアイデアをステートに追加
+      setIdeas([...ideas, response.data]);
+      // フォームの入力をリセット
+      setIdeaText('');
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error("アイデアの送信に失敗しました:", error);
     }
   };
 
   return (
     <div>
-      <h1>User List</h1>
-      <UserForm onSubmit={handleAddUser} />
-      {users.map((user) => (
-        <UserListItem key={user.id} user={user} onDelete={handleDeleteUser} />
-      ))}
+      <h1>アイデア投稿フォーム</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={ideaText}
+          onChange={(e) => setIdeaText(e.target.value)}
+          placeholder="あなたのアイデアをここに入力..."
+          required
+        />
+        <button type="submit">送信</button>
+      </form>
+      <h2>投稿されたアイデア</h2>
+      <ul>
+        {ideas.map((idea) => (
+          <li key={idea.id}>{idea.text}</li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-export default IndexPage;
+export default HomePage;
+
+
+
+
+
+
+

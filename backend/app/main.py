@@ -4,7 +4,7 @@
 
 from fastapi import FastAPI
 from . import models
-from .routers import user_router
+from .routers import ideas_router
 from .database import engine
 from .middleware import setup_middleware
 
@@ -16,4 +16,4 @@ setup_middleware(app)
 # この操作により、アプリ起動時にテーブルがDBに作成される。すでにあるテーブルは影響されない。
 models.Base.metadata.create_all(bind=engine)
 
-app.include_router(user_router.router)
+app.include_router(ideas_router.router)
