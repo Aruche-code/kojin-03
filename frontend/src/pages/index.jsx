@@ -23,8 +23,7 @@ const HomePage = () => {
   }, []);
 
   // アイデアを送信する関数
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleIdeaSubmission = async () => {
     try {
       // バックエンドにPOSTリクエストを送信
       const response = await axios.post('/api/ideas/post', { text: ideaText });
@@ -40,7 +39,6 @@ const HomePage = () => {
   return (
     <div>
       <h1>アイデア投稿フォーム</h1>
-      <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={ideaText}
@@ -48,8 +46,7 @@ const HomePage = () => {
           placeholder="あなたのアイデアをここに入力..."
           required
         />
-        <button type="submit">送信</button>
-      </form>
+        <button onClick={handleIdeaSubmission}>送信</button>
       <h2>投稿されたアイデア</h2>
       <ul>
         {ideas.map((idea) => (
