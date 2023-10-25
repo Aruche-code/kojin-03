@@ -7,7 +7,6 @@ from sqlalchemy import Column, Integer, String, Sequence
 from sqlalchemy.ext.declarative import declarative_base
 
 """
-すでにmodels.pyが存在しますが、
 将来的に新しいテーブルやクラスが増えた場合、それぞれのモデルクラスを別々のファイルに分割して、
 modelsディレクトリの中に配置すること  (例)./models/user_models.py .. hello_models.py ...
 """

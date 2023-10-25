@@ -12,10 +12,10 @@ origins = ["http://localhost:3000"]
 def setup_cors(app: FastAPI) -> None:
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=origins,  # 本番環境では具体的なオリジンを設定すること
+        allow_origins=origins,  # 本番環境では具体的なオリジンを設定する
         allow_credentials=True,
-        allow_methods=["*"],  # 任せます
-        allow_headers=["*"],  # 任せます
+        allow_methods=["*"],
+        allow_headers=["*"],
     )
 
 
