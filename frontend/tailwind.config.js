@@ -13,5 +13,9 @@ module.exports = {
       colors: {},
     },
   },
+  //Tailwind CSSを使う際に起きるHTMLタグのデフォルトスタイルのリセットを無効化(併用可能に)
+  corePlugins: {
+    preflight: false,
+  },
   plugins: [],
 };
