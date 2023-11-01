@@ -1,12 +1,11 @@
 # backend/app/middleware.py
 # CORSの設定: フロントエンドとの通信を許可するため、特定のオリジンからの
 # クロスオリジンリクエストを許可します。
-# これはブラウザのセキュリティを維持するために重要です。
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 
-origins = ["http://localhost:3000"]
+origins = ["http://nextjs-app:3000"]
 
 
 def setup_cors(app: FastAPI) -> None:

@@ -10,7 +10,8 @@ const HomePage = () => {
   // アイデアのリストを取得する関数
   const fetchIdeas = async () => {
     try {
-      const response = await axios.get('/api/ideas/get');
+      // RESTfulに従い、エンドポイントを修正
+      const response = await axios.get('/api/ideas');
       setIdeas(response.data);
     } catch (error) {
       console.error("アイデアの取得に失敗しました:", error);
@@ -25,8 +26,8 @@ const HomePage = () => {
   // アイデアを送信する関数
   const handleIdeaSubmission = async () => {
     try {
-      // バックエンドにPOSTリクエストを送信
-      const response = await axios.post('/api/ideas/post', { text: ideaText });
+      // RESTfulに従い、エンドポイントを修正
+      const response = await axios.post('/api/ideas', { text: ideaText });
       // 新しいアイデアをステートに追加
       setIdeas([...ideas, response.data]);
       // フォームの入力をリセット
@@ -36,21 +37,35 @@ const HomePage = () => {
     }
   };
 
+  // アイデアを削除する関数
+  const handleIdeaDelete = async (id) => {
+    try {
+      // RESTfulに従い、エンドポイントを修正
+      await axios.delete(`/api/ideas/${id}`);
+      setIdeas(ideas.filter((idea) => idea.id !== id));
+    } catch (error) {
+      console.error("アイデアの削除に失敗しました:", error);
+    }
+  };
+
   return (
     <div>
       <h1>アイデア投稿フォーム</h1>
-        <input
-          type="text"
-          value={ideaText}
-          onChange={(e) => setIdeaText(e.target.value)}
-          placeholder="あなたのアイデアをここに入力..."
-          required
-        />
-        <button onClick={handleIdeaSubmission}>送信</button>
+      <input
+        type="text"
+        value={ideaText}
+        onChange={(e) => setIdeaText(e.target.value)}
+        placeholder="あなたのアイデアをここに入力..."
+        required
+      />
+      <button onClick={handleIdeaSubmission}>送信</button>
       <h2>投稿されたアイデア</h2>
       <ul>
         {ideas.map((idea) => (
-          <li key={idea.id}>{idea.text}</li>
+          <li key={idea.id}>
+            {idea.text}
+            <button onClick={() => handleIdeaDelete(idea.id)}>削除</button>
+          </li>
         ))}
       </ul>
     </div>
@@ -58,6 +73,7 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
 
 
 

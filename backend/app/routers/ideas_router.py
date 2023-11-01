@@ -8,19 +8,29 @@ from .. import schemas, models
 from ..database import get_db
 
 # このルーターに追加されるすべてのルート（エンドポイント）は、/ideasから始まる
-router = APIRouter(prefix="/ideas", tags=["ideas"])
-# router = APIRouter()
+router = APIRouter(tags=["ideas"])
 
 
-@router.get("/get", response_model=list[schemas.Idea])
+@router.get("/ideas", response_model=list[schemas.Idea])
 def read_ideas(db: Session = Depends(get_db)):
     return db.query(models.Idea).all()
 
 
-@router.post("/post", response_model=schemas.Idea)
+@router.post("/ideas", response_model=schemas.Idea)
 def create_idea(idea: schemas.IdeaCreate, db: Session = Depends(get_db)):
     db_idea = models.Idea(text=idea.text)
     db.add(db_idea)
     db.commit()
     db.refresh(db_idea)
+    return db_idea
+
+
+@router.delete("/ideas/{id}", response_model=schemas.Idea)
+def delete_idea(id: int, db: Session = Depends(get_db)):
+    # データベースからアイデアを検索
+    db_idea = db.query(models.Idea).filter(models.Idea.id == id).first()
+    if db_idea is None:
+        raise HTTPException(status_code=404, detail="Idea not found")
+    db.delete(db_idea)
+    db.commit()
     return db_idea
