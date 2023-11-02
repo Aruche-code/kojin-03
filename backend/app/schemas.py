@@ -18,9 +18,3 @@ class Idea(BaseModel):
 
     class Config:
         from_attributes = True
-
-
-# (推奨)from_ormの非推奨化され、model_validateが新設された
-# V1では、ORMインスタンスからPydanticインスタンスを作成する場合は、orm_mode=Trueをセットし、from_ormで処理していましたが
-# V2では、from_attributes=Trueをセットし、model_validateで処理するように変更されています。
-# ただし、from_ormも現状では従来通り動作します。
