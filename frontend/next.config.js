@@ -7,7 +7,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "http://fastapi-app:8000/:path*",
+        destination: "http://fastapi-app-k:8000/:path*",
       },
     ];
   },

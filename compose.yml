@@ -1,7 +1,11 @@
 version: "3"
 
+volumes:
+  db-data:
+  node_modules:
+
 services:
-  fastapi-app:
+  fastapi-app-k:
     build:
       context: ./backend
     ports:
@@ -11,7 +15,7 @@ services:
     volumes:
       - ./backend:/app
 
-  nextjs-app:
+  nextjs-app-k:
     build:
       context: ./frontend
     ports:
@@ -26,7 +30,3 @@ services:
       - postgres.env
     volumes:
       - db-data:/var/lib/postgresql/data
-
-volumes:
-  db-data:
-  node_modules:
