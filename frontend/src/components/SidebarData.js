@@ -1,5 +1,5 @@
 import HomeIcon from "@mui/icons-material/Home";
-import AttachEmailIcon from "@mui/icons-material/AttachEmail";
+import CreateIcon from "@mui/icons-material/Create";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AddCardIcon from "@mui/icons-material/AddCard";
@@ -13,9 +13,9 @@ export const SidebarData = [
     link: "/",
   },
   {
-    title: "about",
-    icon: <AttachEmailIcon />,
-    link: "/about",
+    title: "アイデア作成",
+    icon: <CreateIcon />,
+    link: "/idea",
   },
   {
     title: "未定",

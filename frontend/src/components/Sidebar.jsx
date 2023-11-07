@@ -4,25 +4,26 @@ import { SidebarData } from "./SidebarData";
 
 function Sidebar() {
   return (
-    <div className="flex">
-      <ul className="flex-col">
-        {SidebarData.map((item) => (
-          <li
-            key={item.title}
-            className="flex items-center px-4 py-4 text-gray-700 rounded hover:bg-gray-100"
-          >
-            <Link
-              className="flex items-center text-sm font-medium text-gray-700"
-              href={item.link}
-              style={{ textDecoration: "none" }}
+    <aside className="flex-shrink-0 w-44 bg-gray-800 text-white">
+      <nav className="p-4">
+        <ul>
+          {SidebarData.map((item, key) => (
+            <li
+              key={key}
+              className="flex items-center p-2 hover:bg-gray-700 rounded"
             >
-              <span className="mr-2">{item.icon}</span>
-              {item.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+              <Link
+                className="flex items-center text-sm font-medium"
+                href={item.link}
+              >
+                <span className="pr-5">{item.icon}</span>
+                {item.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
   );
 }
 

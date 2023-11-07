@@ -13,9 +13,10 @@ module.exports = {
       colors: {},
     },
   },
-  //Tailwind CSSを使う際に起きるHTMLタグのデフォルトスタイルのリセットを無効化(併用可能に)
+  //Tailwind CSSを使う際に起きるHTMLタグのデフォルトスタイルのリセットを有効化,無効化するオプション
+  //Tailwind CSSにより適用されるスタイルリセットのもう1つの特長は、マージンと余白がすべて削除される
   corePlugins: {
-    preflight: false,
+    preflight: true,
   },
   plugins: [],
 };
