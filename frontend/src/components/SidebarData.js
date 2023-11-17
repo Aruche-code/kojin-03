@@ -18,9 +18,9 @@ export const SidebarData = [
     link: "/idea",
   },
   {
-    title: "未定",
+    title: "テストページ",
     icon: <AssessmentIcon />,
-    link: "/",
+    link: "/test",
   },
   {
     title: "未定",
@@ -38,7 +38,7 @@ export const SidebarData = [
     link: "/",
   },
   {
-    title: "未定",
+    title: "設定",
     icon: <SettingsIcon />,
     link: "/",
   },

@@ -1,15 +1,13 @@
-import AppBar from "../components/AppBar";
-import Sidebar from "../components/Sidebar";
+//トップレベルのページコンポーネント
+import Layout from "@/components/layouts";
 
 const Home = () => {
   return (
-    <div className="flex flex-col h-screen">
-      <AppBar />
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar />
-        <div className="flex flex-col flex-1 p-4 overflow-auto"></div>
+    <Layout>
+      <div className="flex-1 bg-gray-100 p-4 shadow rounded-lg m-2">
+        <h1>ホームだよ</h1>
       </div>
-    </div>
+    </Layout>
   );
 };
 
